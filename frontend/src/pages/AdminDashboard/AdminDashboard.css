@@ -156,32 +156,57 @@
 }
 
 .admin-btn-refresh {
-    background: var(--surface-2);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: #ffffff;
+    border: none;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
 }
 
 .admin-btn-refresh:hover {
-    background: var(--surface);
-    border-color: var(--border-color);
+    background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    transform: translateY(-2px);
+}
+
+.admin-btn-refresh:active {
+    transform: translateY(0px);
 }
 
 .admin-btn-danger {
-    background: rgba(248, 113, 113, 0.15);
-    color: #fecaca;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
 }
 
 .admin-btn-danger:hover {
-    background: rgba(248, 113, 113, 0.22);
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+    transform: translateY(-2px);
+}
+
+.admin-btn-danger:active {
+    transform: translateY(0px);
 }
 
 .admin-btn-edit {
-    background: rgba(96, 165, 250, 0.15);
-    color: #bfdbfe;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
 }
 
 .admin-btn-edit:hover {
-    background: rgba(96, 165, 250, 0.22);
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+    transform: translateY(-2px);
+}
+
+.admin-btn-edit:active {
+    transform: translateY(0px);
 }
 
 .admin-table {
@@ -228,13 +253,14 @@
 }
 
 .admin-table-btn {
-    padding: 0.4rem 0.8rem;
+    padding: 0.5rem 1rem;
     font-size: 0.8rem;
-    border-radius: 6px;
+    border-radius: 8px;
     border: none;
     cursor: pointer;
     transition: all 0.2s ease;
     font-weight: 600;
+    letter-spacing: 0.4px;
 }
 
 .admin-empty-state {
