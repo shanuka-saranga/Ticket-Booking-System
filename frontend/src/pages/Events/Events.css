@@ -13,7 +13,7 @@
 }
 
 .filter-bar {
-    background: white;
+    background: var(--surface);
     padding: 10px 14px;
     border-radius: 6px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
@@ -22,21 +22,21 @@
 }
 
 .filter-title {
-    color: #333;
+    color: var(--text-primary);
     font-size: 1rem;
     font-weight: 700;
     margin-bottom: 8px;
 }
 
 .filter-bar .form-label {
-    color: #555;
+    color: var(--text-muted);
     margin-bottom: 6px;
     font-size: 0.9rem;
 }
 
 .filter-bar .form-select,
 .filter-bar .form-control {
-    border: 1px solid #eee;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     padding: 0.32rem 0.45rem;
     font-size: 0.88rem;
@@ -52,23 +52,23 @@
 }
 
 .filter-bar .btn-outline-secondary {
-    border-color: #e6e6e6;
-    color: #666;
+    border-color: var(--border-color);
+    color: var(--text-muted);
     font-size: 0.85rem;
     padding: 0.35rem 0.9rem;
 }
 
 .filter-bar .btn-outline-secondary:hover {
-    background-color: #f0f0f0;
-    border-color: #999;
-    color: #333;
+    background-color: var(--surface-2);
+    border-color: var(--border-color);
+    color: var(--text-primary);
 }
 
 /* Event Cards */
 .event-card {
     border-radius: 10px;
     overflow: hidden;
-    background: #fff;
+    background: var(--card-bg);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -126,12 +126,12 @@
 }
 
 .event-details h5 {
-    color: #333;
+    color: var(--text-primary);
     font-size: 1rem;
 }
 
 .event-details p {
-    color: #666;
+    color: var(--text-muted);
     margin-bottom: 0.75rem;
 }
 
