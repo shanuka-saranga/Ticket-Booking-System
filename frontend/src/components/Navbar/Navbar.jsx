@@ -120,6 +120,7 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = () => {
+<<<<<<< HEAD
     // Save cart items before clearing
     const cartItems = localStorage.getItem("cartItems");
 
@@ -132,6 +133,10 @@ const Navbar = () => {
     }
 
     navigate("/login", { replace: true });
+=======
+    localStorage.clear();
+    navigate("/login");
+>>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
   };
 
   // නමේ මුල් අකුර

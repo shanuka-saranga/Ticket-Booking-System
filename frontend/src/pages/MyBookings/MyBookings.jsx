@@ -12,6 +12,7 @@ const MyBookings = () => {
   const [statusMessage, setStatusMessage] = useState("");
 
   const paidBookings = useMemo(
+<<<<<<< HEAD
     () =>
       bookings.filter((booking) => {
         const paymentStatus = String(booking.paymentStatus || "")
@@ -42,6 +43,12 @@ const MyBookings = () => {
     return paymentStatus || "Paid";
   };
 
+=======
+    () => bookings.filter((booking) => booking.paymentStatus === "Paid"),
+    [bookings],
+  );
+
+>>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
   const updateStorage = (nextBookings) => {
     setBookings(nextBookings);
     localStorage.setItem("myBookings", JSON.stringify(nextBookings));
@@ -87,10 +94,17 @@ const MyBookings = () => {
           </div>
         )}
 
+<<<<<<< HEAD
         {paidBookings.length === 0 && declinedBookings.length === 0 ? (
           <div className="empty-bookings-card text-center">
             <i className="bi bi-ticket-perforated"></i>
             <h4>No bookings yet</h4>
+=======
+        {paidBookings.length === 0 ? (
+          <div className="empty-bookings-card text-center">
+            <i className="bi bi-ticket-perforated"></i>
+            <h4>No confirmed bookings yet</h4>
+>>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
             <p>
               Complete payment from the cart to create your booking history.
             </p>
@@ -103,6 +117,7 @@ const MyBookings = () => {
           </div>
         ) : (
           <>
+<<<<<<< HEAD
             {/* CONFIRMED BOOKINGS SECTION */}
             {paidBookings.length > 0 && (
               <>
@@ -270,6 +285,79 @@ const MyBookings = () => {
                 </div>
               </>
             )}
+=======
+            <div className="booking-summary-bar">
+              <div>
+                <span className="summary-label">Total Bookings</span>
+                <h5>{paidBookings.length}</h5>
+              </div>
+              <div>
+                <span className="summary-label">Total Paid</span>
+                <h5>Rs {totalPaid.toLocaleString()}</h5>
+              </div>
+              <div>
+                <span className="summary-label">Status</span>
+                <h5>Paid & Confirmed</h5>
+              </div>
+            </div>
+
+            <div className="row g-4">
+              {paidBookings.map((booking) => (
+                <div className="col-lg-6" key={booking.bookingId}>
+                  <div className="booking-card">
+                    <div className="booking-card-top">
+                      <div>
+                        <h4 className="booking-event-title">
+                          {booking.eventTitle}
+                        </h4>
+                        <p className="booking-location mb-0">
+                          <i className="bi bi-geo-alt-fill me-1"></i>
+                          {booking.location}
+                        </p>
+                      </div>
+                      <span className="status-pill confirmed">Confirmed</span>
+                    </div>
+
+                    <div className="booking-meta-grid">
+                      <div>
+                        <span>Booking ID</span>
+                        <strong>{booking.bookingId}</strong>
+                      </div>
+                      <div>
+                        <span>Ticket Type</span>
+                        <strong>{booking.category}</strong>
+                      </div>
+                      <div>
+                        <span>Qty</span>
+                        <strong>{booking.quantity}</strong>
+                      </div>
+                      <div>
+                        <span>Total</span>
+                        <strong>
+                          Rs {Number(booking.totalPrice || 0).toLocaleString()}
+                        </strong>
+                      </div>
+                    </div>
+
+                    <div className="booking-card-actions">
+                      <button
+                        className="btn btn-outline-dark rounded-pill px-4"
+                        onClick={() => setSelectedBooking(booking)}
+                      >
+                        View Details
+                      </button>
+                      <button
+                        className="btn btn-outline-danger rounded-pill px-4"
+                        onClick={() => handleCancelBooking(booking.bookingId)}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+>>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
           </>
         )}
       </div>
@@ -321,9 +409,13 @@ const MyBookings = () => {
               </div>
               <div className="detail-row">
                 <span>Payment</span>
+<<<<<<< HEAD
                 <strong>
                   {normalizePaymentStatus(selectedBooking.paymentStatus)}
                 </strong>
+=======
+                <strong>{selectedBooking.paymentStatus}</strong>
+>>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
               </div>
               <div className="detail-row">
                 <span>Status</span>
