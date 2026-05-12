@@ -7,6 +7,7 @@ const userRoutes = require("./routes/userRoutes");
 const eventRoutes = require("./routes/eventRoutes");
 const galleryRoutes = require("./routes/galleryRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
+const db = require("./Connection/db");
 const {
   getAllUsers,
   deleteUser,
@@ -51,6 +52,17 @@ app.put(
 );
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+
+const startServer = async () => {
+  try {
+    await db.ensureBookingsAutoIncrement();
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Failed to initialize database:", error);
+    process.exit(1);
+  }
+};
+
+startServer();
