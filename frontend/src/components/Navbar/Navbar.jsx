@@ -26,6 +26,8 @@ const Navbar = () => {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const [userName, setUserName] = useState(initialUserName);
   const [profileImage, setProfileImage] = useState(initialProfileImage);
+  const navbarRef = useRef(null);
+  const collapseRef = useRef(null);
   const profileRef = useRef(null);
 
   const updateCartCount = () => {
@@ -62,13 +64,28 @@ const Navbar = () => {
   }, [isNoHeroPage]);
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
+    const handleOutsideClick = (e) => {
       if (profileRef.current && !profileRef.current.contains(e.target)) {
         setProfileOpen(false);
       }
+
+      if (navbarRef.current && navbarRef.current.contains(e.target)) {
+        return;
+      }
+
+      const collapseElement = collapseRef.current;
+      if (!collapseElement || !collapseElement.classList.contains("show")) {
+        return;
+      }
+
+      const toggleElement = navbarRef.current?.querySelector(".navbar-toggler");
+      if (toggleElement) {
+        toggleElement.click();
+      }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
   useEffect(() => {
@@ -112,6 +129,7 @@ const Navbar = () => {
 
   return (
     <nav
+      ref={navbarRef}
       className={`navbar navbar-expand-lg fixed-top transition-nav ${scrolled ? "nav-scrolled shadow-sm" : "nav-transparent"}`}
     >
       <div className="container">
@@ -128,7 +146,11 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div
+          ref={collapseRef}
+          className="collapse navbar-collapse"
+          id="navbarNav"
+        >
           <ul className="navbar-nav ms-auto align-items-center">
             {/* ===== COMMON LINKS (Show to everyone) ===== */}
             <li className="nav-item">
