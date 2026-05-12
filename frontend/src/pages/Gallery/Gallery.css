@@ -1,7 +1,7 @@
 /* Gallery Page Styles */
 .gallery-page {
     overflow-x: hidden;
-    background-color: #f8f9fa;
+    background-color: var(--page-bg);
 }
 
 .gallery-header {
@@ -9,14 +9,14 @@
 }
 
 .gallery-page-title {
-    color: #111;
+    color: var(--text-primary);
     font-size: 2.6rem;
     font-weight: 800;
     margin-bottom: 14px;
 }
 
 .gallery-page-subtitle {
-    color: #6c757d;
+    color: var(--text-muted);
     font-size: 1.05rem;
     max-width: 720px;
 }
@@ -37,7 +37,7 @@
 .filter-title {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #111;
+    color: var(--text-primary);
     margin-bottom: 30px;
     position: relative;
     display: inline-block;
@@ -65,9 +65,9 @@
 
 .filter-btn {
     padding: 12px 28px;
-    border: 2px solid #e0e0e0;
-    background: #ffffff;
-    color: #333;
+    border: 2px solid var(--border-color);
+    background: var(--surface);
+    color: var(--text-primary);
     border-radius: 50px;
     font-weight: 600;
     cursor: pointer;
@@ -77,8 +77,8 @@
 }
 
 .filter-btn:hover {
-    border-color: #e67e22;
-    color: #e67e22;
+    border-color: var(--accent);
+    color: var(--accent);
     transform: translateY(-2px);
 }
 
@@ -102,8 +102,8 @@
     overflow: hidden;
     border-radius: 12px;
     cursor: pointer;
-    background: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    background: var(--card-bg);
+    box-shadow: 0 4px 12px var(--shadow-color);
     transition: all 0.3s ease;
     height: 300px;
 }
@@ -167,8 +167,8 @@
 }
 
 .view-btn {
-    background: #ffffff;
-    color: #e67e22;
+    background: var(--surface);
+    color: var(--accent);
     border: none;
     padding: 10px 24px;
     border-radius: 50px;
@@ -224,7 +224,7 @@
 
 .loading-spinner p {
     font-size: 1.1rem;
-    color: #666;
+    color: var(--text-muted);
     font-weight: 600;
 }
 
