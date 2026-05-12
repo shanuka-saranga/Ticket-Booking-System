@@ -266,3 +266,47 @@
         grid-template-columns: auto 1fr;
     }
 }
+
+@media (max-width: 576px) {
+    .profile-settings-page {
+        padding-top: 78px;
+    }
+
+    .profile-settings-hero {
+        padding: 16px 0 6px;
+    }
+
+    .settings-hero-card,
+    .settings-main-card,
+    .settings-side-card {
+        padding: 18px;
+        border-radius: 20px;
+    }
+
+    .settings-avatar-wrap,
+    .settings-avatar {
+        width: 72px;
+        height: 72px;
+    }
+
+    .settings-hero-copy h2 {
+        font-size: 1.4rem;
+    }
+
+    .settings-card-head {
+        flex-direction: column;
+    }
+
+    .settings-toggle-card,
+    .settings-input-card {
+        padding: 14px;
+    }
+
+    .theme-option-card {
+        padding: 12px 14px;
+    }
+
+    .settings-actions .btn {
+        width: 100%;
+    }
+}

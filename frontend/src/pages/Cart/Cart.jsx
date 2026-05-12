@@ -3,6 +3,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Cart.css";
 
+const paymentMethodOptions = [
+  { value: "card", label: "Debit / Credit Card", icon: "bi-credit-card" },
+  { value: "wallet", label: "Mobile Wallet", icon: "bi-phone" },
+  { value: "bank", label: "Bank Transfer", icon: "bi-building" },
+];
+
 const Cart = () => {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState(
@@ -17,6 +23,12 @@ const Cart = () => {
     cardNumber: "",
     expiryDate: "",
     cvv: "",
+    walletProvider: "eZ Cash",
+    walletNumber: "",
+    walletReference: "",
+    bankName: "Bank of Ceylon",
+    accountName: "",
+    transferReference: "",
   });
 
   const grandTotal = useMemo(() => {
@@ -51,6 +63,33 @@ const Cart = () => {
     }));
   };
 
+  const selectedPaymentMethod = paymentForm.paymentMethod;
+
+  const getPaymentDetailsPayload = () => {
+    if (selectedPaymentMethod === "wallet") {
+      return {
+        walletProvider: paymentForm.walletProvider,
+        walletNumber: paymentForm.walletNumber,
+        walletReference: paymentForm.walletReference,
+      };
+    }
+
+    if (selectedPaymentMethod === "bank") {
+      return {
+        bankName: paymentForm.bankName,
+        accountName: paymentForm.accountName,
+        transferReference: paymentForm.transferReference,
+      };
+    }
+
+    return {
+      cardHolderName: paymentForm.cardHolderName,
+      cardNumber: paymentForm.cardNumber,
+      expiryDate: paymentForm.expiryDate,
+      cvv: paymentForm.cvv,
+    };
+  };
+
   const handleBuyNow = async () => {
     if (cartItems.length === 0) return;
 
@@ -72,6 +111,10 @@ const Cart = () => {
           totalAmount: Number(item.totalPrice || 0),
           status: "confirmed",
         })),
+        payment: {
+          paymentMethod: paymentForm.paymentMethod,
+          ...getPaymentDetailsPayload(),
+        },
       });
 
       const currentBookings = JSON.parse(
@@ -118,12 +161,12 @@ const Cart = () => {
   const handlePay = async () => {
     const digitsOnly = String(paymentForm.cardNumber || "").replace(/\s+/g, "");
 
-    if (!paymentForm.cardHolderName.trim()) {
-      setCheckoutError("Enter the card holder name.");
-      return;
-    }
-
     if (paymentForm.paymentMethod === "card") {
+      if (!paymentForm.cardHolderName.trim()) {
+        setCheckoutError("Enter the card holder name.");
+        return;
+      }
+
       if (digitsOnly.length < 12) {
         setCheckoutError("Enter a valid card number.");
         return;
@@ -136,6 +179,30 @@ const Cart = () => {
 
       if (String(paymentForm.cvv || "").trim().length < 3) {
         setCheckoutError("Enter the CVV.");
+        return;
+      }
+    }
+
+    if (paymentForm.paymentMethod === "wallet") {
+      if (!paymentForm.walletNumber.trim()) {
+        setCheckoutError("Enter the wallet number.");
+        return;
+      }
+
+      if (!paymentForm.walletReference.trim()) {
+        setCheckoutError("Enter the wallet transaction reference.");
+        return;
+      }
+    }
+
+    if (paymentForm.paymentMethod === "bank") {
+      if (!paymentForm.accountName.trim()) {
+        setCheckoutError("Enter the account name.");
+        return;
+      }
+
+      if (!paymentForm.transferReference.trim()) {
+        setCheckoutError("Enter the bank transfer reference.");
         return;
       }
     }
@@ -257,80 +324,205 @@ const Cart = () => {
             </div>
 
             <div className="checkout-form-grid">
-              <div className="mb-3">
-                <label className="form-label">Payment Method</label>
-                <select
-                  className="form-select"
-                  value={paymentForm.paymentMethod}
-                  onChange={(event) =>
-                    updatePaymentForm("paymentMethod", event.target.value)
-                  }
-                  disabled={isPaying}
-                >
-                  <option value="card">Debit / Credit Card</option>
-                  <option value="wallet">Mobile Wallet</option>
-                  <option value="bank">Bank Transfer</option>
-                </select>
+              <div className="payment-method-selector">
+                {paymentMethodOptions.map((option) => (
+                  <label
+                    key={option.value}
+                    className={`payment-method-card ${selectedPaymentMethod === option.value ? "active" : ""}`}
+                  >
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value={option.value}
+                      checked={selectedPaymentMethod === option.value}
+                      onChange={(event) =>
+                        updatePaymentForm("paymentMethod", event.target.value)
+                      }
+                      disabled={isPaying}
+                    />
+                    <span className="payment-method-icon">
+                      <i className={`bi ${option.icon}`}></i>
+                    </span>
+                    <span className="payment-method-label">{option.label}</span>
+                  </label>
+                ))}
               </div>
 
-              <div className="mb-3">
-                <label className="form-label">Card Holder Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="e.g. Shanuka Perera"
-                  value={paymentForm.cardHolderName}
-                  onChange={(event) =>
-                    updatePaymentForm("cardHolderName", event.target.value)
-                  }
-                  disabled={isPaying}
-                />
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label">Card Number</label>
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  className="form-control"
-                  placeholder="1234 5678 9012 3456"
-                  value={paymentForm.cardNumber}
-                  onChange={(event) =>
-                    updatePaymentForm("cardNumber", event.target.value)
-                  }
-                  disabled={isPaying}
-                />
-              </div>
-
-              <div className="checkout-inline-fields">
-                <div>
-                  <label className="form-label">Expiry Date</label>
-                  <input
-                    type="month"
-                    className="form-control"
-                    value={paymentForm.expiryDate}
-                    onChange={(event) =>
-                      updatePaymentForm("expiryDate", event.target.value)
-                    }
-                    disabled={isPaying}
-                  />
+              {selectedPaymentMethod === "card" && (
+                <div className="payment-details-panel">
+                  <div className="payment-panel-head">
+                    <h6 className="mb-1">Card details</h6>
+                    <p className="mb-0">
+                      Enter your card details to confirm the booking.
+                    </p>
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Card Holder Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="e.g. Shanuka Perera"
+                      value={paymentForm.cardHolderName}
+                      onChange={(event) =>
+                        updatePaymentForm("cardHolderName", event.target.value)
+                      }
+                      disabled={isPaying}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Card Number</label>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      className="form-control"
+                      placeholder="1234 5678 9012 3456"
+                      value={paymentForm.cardNumber}
+                      onChange={(event) =>
+                        updatePaymentForm("cardNumber", event.target.value)
+                      }
+                      disabled={isPaying}
+                    />
+                  </div>
+                  <div className="checkout-inline-fields">
+                    <div>
+                      <label className="form-label">Expiry Date</label>
+                      <input
+                        type="month"
+                        className="form-control"
+                        value={paymentForm.expiryDate}
+                        onChange={(event) =>
+                          updatePaymentForm("expiryDate", event.target.value)
+                        }
+                        disabled={isPaying}
+                      />
+                    </div>
+                    <div>
+                      <label className="form-label">CVV</label>
+                      <input
+                        type="password"
+                        inputMode="numeric"
+                        maxLength="4"
+                        className="form-control"
+                        placeholder="***"
+                        value={paymentForm.cvv}
+                        onChange={(event) =>
+                          updatePaymentForm("cvv", event.target.value)
+                        }
+                        disabled={isPaying}
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <label className="form-label">CVV</label>
-                  <input
-                    type="password"
-                    inputMode="numeric"
-                    maxLength="4"
-                    className="form-control"
-                    placeholder="***"
-                    value={paymentForm.cvv}
-                    onChange={(event) =>
-                      updatePaymentForm("cvv", event.target.value)
-                    }
-                    disabled={isPaying}
-                  />
+              )}
+
+              {selectedPaymentMethod === "wallet" && (
+                <div className="payment-details-panel">
+                  <div className="payment-panel-head">
+                    <h6 className="mb-1">Wallet details</h6>
+                    <p className="mb-0">
+                      Select your wallet and provide the transaction proof.
+                    </p>
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Wallet Provider</label>
+                    <select
+                      className="form-select"
+                      value={paymentForm.walletProvider}
+                      onChange={(event) =>
+                        updatePaymentForm("walletProvider", event.target.value)
+                      }
+                      disabled={isPaying}
+                    >
+                      <option>eZ Cash</option>
+                      <option>mCash</option>
+                      <option>Dialog Genie</option>
+                    </select>
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Wallet Number</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="0771234567"
+                      value={paymentForm.walletNumber}
+                      onChange={(event) =>
+                        updatePaymentForm("walletNumber", event.target.value)
+                      }
+                      disabled={isPaying}
+                    />
+                  </div>
+                  <div className="mb-0">
+                    <label className="form-label">Transaction Reference</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Wallet transaction id"
+                      value={paymentForm.walletReference}
+                      onChange={(event) =>
+                        updatePaymentForm("walletReference", event.target.value)
+                      }
+                      disabled={isPaying}
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {selectedPaymentMethod === "bank" && (
+                <div className="payment-details-panel">
+                  <div className="payment-panel-head">
+                    <h6 className="mb-1">Bank transfer details</h6>
+                    <p className="mb-0">
+                      Fill the bank info and transfer reference used for
+                      payment.
+                    </p>
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Bank Name</label>
+                    <select
+                      className="form-select"
+                      value={paymentForm.bankName}
+                      onChange={(event) =>
+                        updatePaymentForm("bankName", event.target.value)
+                      }
+                      disabled={isPaying}
+                    >
+                      <option>Bank of Ceylon</option>
+                      <option>People's Bank</option>
+                      <option>Commercial Bank</option>
+                      <option>HNB</option>
+                    </select>
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Account Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Name on the transferred account"
+                      value={paymentForm.accountName}
+                      onChange={(event) =>
+                        updatePaymentForm("accountName", event.target.value)
+                      }
+                      disabled={isPaying}
+                    />
+                  </div>
+                  <div className="mb-0">
+                    <label className="form-label">Transfer Reference</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Bank transfer reference"
+                      value={paymentForm.transferReference}
+                      onChange={(event) =>
+                        updatePaymentForm(
+                          "transferReference",
+                          event.target.value,
+                        )
+                      }
+                      disabled={isPaying}
+                    />
+                  </div>
+                </div>
+              )}
 
               {checkoutError && (
                 <div className="alert alert-danger rounded-4 mt-3 mb-0">

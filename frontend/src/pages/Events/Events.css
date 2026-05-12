@@ -216,3 +216,37 @@
         max-width: none;
     }
 }
+
+@media (max-width: 576px) {
+    .filter-bar-section {
+        margin-top: 68px;
+        margin-bottom: 16px;
+        padding: 4px 0;
+    }
+
+    .filter-bar {
+        margin: 0 12px;
+        padding: 12px;
+        border-radius: 14px;
+    }
+
+    .filter-bar .row {
+        row-gap: 10px;
+    }
+
+    .event-image-container {
+        height: 140px;
+    }
+
+    .event-details {
+        padding: 0.75rem !important;
+    }
+
+    .event-details h5 {
+        font-size: 0.95rem;
+    }
+
+    .event-get-btn {
+        width: 100%;
+    }
+}

@@ -70,6 +70,76 @@
     gap: 14px;
 }
 
+.payment-method-selector {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.payment-method-card {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 18px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-2);
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.payment-method-card:hover {
+    transform: translateY(-1px);
+    border-color: rgba(249, 115, 22, 0.35);
+}
+
+.payment-method-card.active {
+    border-color: rgba(249, 115, 22, 0.75);
+    box-shadow: 0 10px 24px rgba(249, 115, 22, 0.1);
+}
+
+.payment-method-card input {
+    margin: 0;
+    width: 18px;
+    height: 18px;
+    accent-color: #f97316;
+}
+
+.payment-method-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    font-size: 1.1rem;
+}
+
+.payment-method-label {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.payment-details-panel {
+    border: 1px solid var(--border-color);
+    border-radius: 22px;
+    background: var(--surface);
+    padding: 18px;
+}
+
+.payment-panel-head h6 {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.payment-panel-head p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
 .checkout-inline-fields {
     display: grid;
     grid-template-columns: 1fr 140px;
@@ -100,5 +170,39 @@
 
     .checkout-footer .btn {
         width: 100%;
+    }
+
+    .payment-method-selector {
+        grid-template-columns: 1fr;
+    }
+
+    .payment-method-card {
+        grid-template-columns: auto 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .checkout-overlay {
+        padding: 16px;
+    }
+
+    .checkout-modal {
+        padding: 22px;
+    }
+
+    .payment-method-selector {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .checkout-inline-fields {
+        grid-template-columns: 1fr 120px;
+    }
+
+    .payment-details-panel {
+        padding: 16px;
+    }
+
+    .checkout-summary {
+        grid-template-columns: 1fr;
     }
 }

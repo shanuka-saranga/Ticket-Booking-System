@@ -220,3 +220,73 @@
  .see-more-btn {
      min-width: 150px;
  }
+
+ @media (max-width: 768px) {
+     .hero-section {
+         height: auto;
+         min-height: 360px;
+         padding-top: 92px;
+         padding-bottom: 28px;
+     }
+
+     .hero-title {
+         font-size: 2.2rem;
+     }
+
+     .search-bar-pill {
+         padding: 0.2rem;
+     }
+
+     .event-image-container {
+         height: 160px;
+     }
+
+     .section-title {
+         padding-left: 12px;
+         font-size: 1.2rem;
+     }
+ }
+
+ @media (max-width: 576px) {
+     .hero-section {
+         min-height: 300px;
+         padding-top: 84px;
+         padding-bottom: 24px;
+     }
+
+     .hero-title {
+         font-size: 1.75rem;
+         line-height: 1.15;
+     }
+
+     .search-bar-pill {
+         border-radius: 18px;
+     }
+
+     .search-bar-input {
+         padding: 0.78rem 1rem;
+         font-size: 0.95rem;
+     }
+
+     .search-bar-btn {
+         min-width: 48px;
+         width: 48px;
+     }
+
+     .event-image-container {
+         height: 140px;
+     }
+
+     .event-details {
+         padding: 0.7rem !important;
+     }
+
+     .event-details h5 {
+         font-size: 0.95rem;
+     }
+
+     .event-get-btn {
+         width: 100%;
+         min-width: 0;
+     }
+ }

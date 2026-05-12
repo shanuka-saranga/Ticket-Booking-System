@@ -56,6 +56,7 @@ const PORT = process.env.PORT || 5000;
 const startServer = async () => {
   try {
     await db.ensureBookingsAutoIncrement();
+    await db.ensurePaymentsAutoIncrement();
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });

@@ -124,3 +124,41 @@ body .form-select:focus {
   border-color: rgba(249, 115, 22, 0.5);
   box-shadow: 0 0 0 0.25rem rgba(249, 115, 22, 0.12);
 }
+
+@media (max-width: 768px) {
+  :root {
+    --page-padding-x: 16px;
+  }
+
+  body {
+    font-size: 15px;
+  }
+
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .section-title,
+  .page-title,
+  .title-large {
+    letter-spacing: 0.5px;
+  }
+}
+
+@media (max-width: 576px) {
+  body {
+    font-size: 14px;
+  }
+
+  .container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .btn,
+  .form-control,
+  .form-select {
+    border-radius: 12px;
+  }
+}

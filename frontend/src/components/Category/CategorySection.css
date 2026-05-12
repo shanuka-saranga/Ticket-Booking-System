@@ -50,3 +50,24 @@
     transform: scale(1.1);
     /* අකුරු පොඩ්ඩක් ලොකු වෙන්න */
 }
+
+@media (max-width: 768px) {
+    .category-card {
+        height: 170px;
+    }
+
+    .category-name {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 576px) {
+    .category-card {
+        height: 145px;
+    }
+
+    .category-name {
+        font-size: 1rem;
+    }
+}

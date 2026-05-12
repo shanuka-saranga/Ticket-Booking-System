@@ -140,3 +140,62 @@
     color: #e67e22 !important;
     padding-left: 24px;
 }
+
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background: var(--surface);
+        border: 1px solid var(--border-color);
+        border-radius: 18px;
+        padding: 14px;
+        margin-top: 12px;
+        box-shadow: 0 18px 40px var(--shadow-color);
+    }
+
+    .navbar-nav {
+        align-items: stretch !important;
+        gap: 6px;
+    }
+
+    .navbar-nav .nav-item {
+        width: 100%;
+    }
+
+    .navbar-nav .nav-link {
+        display: block;
+        width: 100%;
+        padding: 10px 12px;
+    }
+
+    .navbar-nav .nav-link::after {
+        left: 0;
+        transform: none;
+    }
+
+    .profile-dropdown {
+        position: static;
+        margin-top: 10px;
+        width: 100%;
+        min-width: 0;
+        box-shadow: none;
+        border: 1px solid var(--border-color);
+    }
+}
+
+@media (max-width: 576px) {
+
+    .transition-nav,
+    .nav-transparent,
+    .nav-scrolled {
+        min-height: 64px;
+    }
+
+    .profile-initial-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .profile-dropdown .dropdown-item {
+        padding: 10px 16px;
+    }
+}

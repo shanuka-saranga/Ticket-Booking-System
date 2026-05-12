@@ -170,9 +170,40 @@
     }
 }
 
+@media (max-width: 768px) {
+    .event-details-page {
+        padding-top: 70px;
+    }
+
+    .event-details-image-col {
+        min-height: 320px;
+    }
+
+    .event-details-content {
+        padding: 22px;
+    }
+
+    .event-details-info-grid,
+    .ticket-category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
 @media (max-width: 576px) {
     .event-details-page {
         padding-top: 70px;
+    }
+
+    .event-details-shell {
+        border-radius: 18px;
+    }
+
+    .event-details-image-col {
+        min-height: 260px;
+    }
+
+    .event-details-content {
+        padding: 18px;
     }
 
     .event-details-info-grid,
@@ -186,5 +217,17 @@
 
     .event-details-overlay h2 {
         font-size: 1.3rem;
+    }
+
+    .event-details-overlay {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        padding: 14px;
+    }
+
+    .ticket-category-btn,
+    .event-cart-btn {
+        width: 100%;
     }
 }

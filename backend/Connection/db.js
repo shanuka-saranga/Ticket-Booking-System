@@ -10,14 +10,14 @@ const pool = mysql.createPool({
 
 const db = pool.promise();
 
-const ensureBookingsAutoIncrement = async () => {
+const ensureAutoIncrement = async (tableName) => {
   const [rows] = await db.query(
     `SELECT EXTRA
      FROM INFORMATION_SCHEMA.COLUMNS
      WHERE TABLE_SCHEMA = ?
-       AND TABLE_NAME = 'bookings'
+       AND TABLE_NAME = ?
        AND COLUMN_NAME = 'id'`,
-    [process.env.DB_NAME],
+    [process.env.DB_NAME, tableName],
   );
 
   if (
@@ -25,10 +25,14 @@ const ensureBookingsAutoIncrement = async () => {
     !String(rows[0].EXTRA || "").includes("auto_increment")
   ) {
     await db.query(
-      "ALTER TABLE bookings MODIFY id int(11) NOT NULL AUTO_INCREMENT",
+      `ALTER TABLE ${tableName} MODIFY id int(11) NOT NULL AUTO_INCREMENT`,
     );
   }
 };
 
+const ensureBookingsAutoIncrement = async () => ensureAutoIncrement("bookings");
+const ensurePaymentsAutoIncrement = async () => ensureAutoIncrement("payments");
+
 module.exports = db;
 module.exports.ensureBookingsAutoIncrement = ensureBookingsAutoIncrement;
+module.exports.ensurePaymentsAutoIncrement = ensurePaymentsAutoIncrement;
