@@ -1,5 +1,6 @@
 :root {
   --page-bg: #f7f8fb;
+  --auth-bg: linear-gradient(135deg, #caccd4 0%, #95a8e8 100%);
   --surface: rgba(255, 255, 255, 0.92);
   --surface-2: rgba(248, 250, 252, 0.96);
   --card-bg: #ffffff;
@@ -19,6 +20,7 @@
 
 [data-theme="dark"] {
   --page-bg: #07111f;
+  --auth-bg: linear-gradient(135deg, #07111f 0%, #0f172a 50%, #020617 100%);
   --surface: rgba(10, 16, 30, 0.94);
   --surface-2: rgba(15, 23, 42, 0.94);
   --card-bg: #0f172a;
@@ -38,6 +40,12 @@
 html {
   scroll-behavior: smooth;
   background: var(--page-bg);
+}
+
+.App {
+  min-height: 100vh;
+  background: var(--page-bg);
+  color: var(--text-primary);
 }
 
 body {
@@ -61,7 +69,27 @@ body .card,
 body .table-responsive,
 body .table,
 body .modal-content,
-body .dropdown-menu {
+body .dropdown-menu,
+body .auth-card,
+body .event-card,
+body .gallery-item,
+body .empty-bookings-card,
+body .booking-summary-bar,
+body .booking-card,
+body .contact-info-card,
+body .contact-form-card,
+body .event-details-shell,
+body .event-details-content-col,
+body .filter-bar,
+body .admin-panel-container,
+body .admin-stat-card,
+body .admin-edit-form,
+body .admin-empty-state,
+body .checkout-modal,
+body .checkout-summary>div,
+body .settings-hero-card,
+body .settings-main-card,
+body .settings-side-card {
   background-color: var(--card-bg);
   color: var(--text-primary);
 }
