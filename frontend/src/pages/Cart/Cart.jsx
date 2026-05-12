@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { useEffect, useMemo, useState } from "react";
-=======
-import React, { useMemo, useState } from "react";
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Cart.css";
@@ -11,14 +7,11 @@ const paymentMethodOptions = [
   { value: "card", label: "Debit / Credit Card", icon: "bi-credit-card" },
   { value: "wallet", label: "Mobile Wallet", icon: "bi-phone" },
   { value: "bank", label: "Bank Transfer", icon: "bi-building" },
-<<<<<<< HEAD
   {
     value: "payhere",
     label: "PayHere (Sandbox)",
     icon: "bi-credit-card-2-back",
   },
-=======
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
 ];
 
 const Cart = () => {
@@ -26,12 +19,9 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("cartItems") || "[]"),
   );
-<<<<<<< HEAD
   const [selectedItems, setSelectedItems] = useState(
     new Set(cartItems.map((_, index) => index)),
   );
-=======
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
   const [showCheckout, setShowCheckout] = useState(false);
   const [isPaying, setIsPaying] = useState(false);
   const [checkoutError, setCheckoutError] = useState("");
@@ -50,7 +40,6 @@ const Cart = () => {
   });
 
   const grandTotal = useMemo(() => {
-<<<<<<< HEAD
     return cartItems.reduce((sum, item, index) => {
       if (selectedItems.has(index)) {
         return sum + Number(item.totalPrice || 0);
@@ -118,13 +107,6 @@ const Cart = () => {
       setSelectedItems(new Set(cartItems.map((_, index) => index)));
     }
   };
-=======
-    return cartItems.reduce(
-      (sum, item) => sum + Number(item.totalPrice || 0),
-      0,
-    );
-  }, [cartItems]);
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
 
   const removeItem = (indexToRemove) => {
     const updated = cartItems.filter((_, index) => index !== indexToRemove);
@@ -134,13 +116,10 @@ const Cart = () => {
   };
 
   const openCheckout = () => {
-<<<<<<< HEAD
     if (selectedItems.size === 0) {
       alert("Please select at least one ticket to purchase.");
       return;
     }
-=======
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
     setCheckoutError("");
     setShowCheckout(true);
   };
@@ -186,7 +165,6 @@ const Cart = () => {
   };
 
   const handleBuyNow = async () => {
-<<<<<<< HEAD
     if (selectedItems.size === 0) {
       setCheckoutError("Please select at least one ticket to purchase.");
       return;
@@ -195,9 +173,6 @@ const Cart = () => {
     const selectedCartItems = cartItems.filter((_, index) =>
       selectedItems.has(index),
     );
-=======
-    if (cartItems.length === 0) return;
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
 
     const userData = localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user"))
@@ -212,11 +187,7 @@ const Cart = () => {
     try {
       const response = await axios.post("http://localhost:5000/api/bookings", {
         userId: userData.id,
-<<<<<<< HEAD
         bookings: selectedCartItems.map((item) => ({
-=======
-        bookings: cartItems.map((item) => ({
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
           eventId: item.eventId || item.event_id || null,
           totalAmount: Number(item.totalPrice || 0),
           status: "confirmed",
@@ -232,7 +203,6 @@ const Cart = () => {
       );
 
       const bookingBatch = response.data.bookings.map((booking, index) => {
-<<<<<<< HEAD
         const item = selectedCartItems[index];
         // Check payment status from response - could be 'success', 'Paid', 'Declined', 'failed', etc.
         const paymentStatus = String(
@@ -241,9 +211,6 @@ const Cart = () => {
         const isDeclined =
           paymentStatus.includes("declined") ||
           paymentStatus.includes("failed");
-=======
-        const item = cartItems[index];
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
 
         return {
           bookingId: booking.id,
@@ -251,13 +218,8 @@ const Cart = () => {
           event_id: booking.event_id,
           bookingDate: booking.booking_date,
           totalPrice: Number(booking.total_amount || 0),
-<<<<<<< HEAD
           bookingStatus: isDeclined ? "Declined" : "Confirmed",
           paymentStatus: isDeclined ? "Declined" : "Paid",
-=======
-          bookingStatus: "Confirmed",
-          paymentStatus: "Paid",
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
           eventTitle: item.eventTitle,
           location: item.location,
           category: item.category,
@@ -271,7 +233,6 @@ const Cart = () => {
         JSON.stringify([...bookingBatch, ...currentBookings]),
       );
 
-<<<<<<< HEAD
       // Check if any payment was declined
       const hasDeclined = bookingBatch.some(
         (b) => b.paymentStatus === "Declined",
@@ -304,16 +265,6 @@ const Cart = () => {
     } catch (error) {
       setIsPaying(false);
       setCheckoutError(
-=======
-      alert("Payment successful! Your booking has been confirmed.");
-      setCartItems([]);
-      localStorage.setItem("cartItems", JSON.stringify([]));
-      window.dispatchEvent(new Event("cartUpdated"));
-      navigate("/my-bookings");
-    } catch (error) {
-      setIsPaying(false);
-      alert(
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
         error?.response?.data?.message || "Booking failed. Please try again.",
       );
     }
@@ -370,7 +321,6 @@ const Cart = () => {
 
     setCheckoutError("");
     setIsPaying(true);
-<<<<<<< HEAD
 
     // If PayHere selected, use the PayHere JS checkout flow directly
     if (paymentForm.paymentMethod === "payhere") {
@@ -567,9 +517,6 @@ const Cart = () => {
         return;
       }
     }
-
-=======
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
     await handleBuyNow();
     setIsPaying(false);
   };
@@ -577,8 +524,6 @@ const Cart = () => {
   return (
     <>
       <div className="container py-5" style={{ marginTop: "90px" }}>
-<<<<<<< HEAD
-=======
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h2 className="mb-0">Your Cart</h2>
           <button
@@ -588,8 +533,6 @@ const Cart = () => {
             Continue Shopping
           </button>
         </div>
-
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
         {cartItems.length === 0 ? (
           <div className="text-center py-5 bg-light rounded-4">
             <h5 className="mb-3">Your cart is empty</h5>
@@ -606,7 +549,6 @@ const Cart = () => {
               <table className="table align-middle mb-0">
                 <thead>
                   <tr>
-<<<<<<< HEAD
                     <th style={{ width: "50px" }}>
                       <input
                         type="checkbox"
@@ -616,8 +558,6 @@ const Cart = () => {
                         title="Select all items"
                       />
                     </th>
-=======
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
                     <th>Event</th>
                     <th>Ticket</th>
                     <th>Qty</th>
@@ -630,7 +570,6 @@ const Cart = () => {
                   {cartItems.map((item, index) => (
                     <tr key={`${item.eventId}-${item.category}-${index}`}>
                       <td>
-<<<<<<< HEAD
                         <input
                           type="checkbox"
                           className="form-check-input"
@@ -639,8 +578,6 @@ const Cart = () => {
                         />
                       </td>
                       <td>
-=======
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
                         <div className="fw-semibold">{item.eventTitle}</div>
                         <div className="small text-muted">{item.location}</div>
                       </td>
@@ -664,7 +601,6 @@ const Cart = () => {
               </table>
             </div>
 
-<<<<<<< HEAD
             <div className="d-flex justify-content-between align-items-center mt-4 px-3">
               <p className="mb-0 text-muted">
                 Selected: {selectedItems.size} of {cartItems.length} items
@@ -681,18 +617,6 @@ const Cart = () => {
                   Buy Selected
                 </button>
               </div>
-=======
-            <div className="d-flex justify-content-end align-items-center gap-3 mt-4">
-              <h5 className="mb-0">
-                Grand Total: Rs {grandTotal.toLocaleString()}
-              </h5>
-              <button
-                className="btn btn-orange rounded-pill px-4"
-                onClick={openCheckout}
-              >
-                Buy Now
-              </button>
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
             </div>
           </>
         )}
@@ -720,13 +644,8 @@ const Cart = () => {
 
             <div className="checkout-summary">
               <div>
-<<<<<<< HEAD
                 <span>Selected items</span>
                 <strong>{selectedItems.size}</strong>
-=======
-                <span>Total items</span>
-                <strong>{cartItems.length}</strong>
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
               </div>
               <div>
                 <span>Total amount</span>
@@ -955,11 +874,7 @@ const Cart = () => {
                 type="button"
                 className="btn btn-orange rounded-pill px-4"
                 onClick={handlePay}
-<<<<<<< HEAD
                 disabled={isPaying || selectedItems.size === 0}
-=======
-                disabled={isPaying}
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
               >
                 {isPaying
                   ? "Processing..."

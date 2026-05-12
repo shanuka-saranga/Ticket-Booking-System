@@ -8,11 +8,8 @@ const eventRoutes = require("./routes/eventRoutes");
 const galleryRoutes = require("./routes/galleryRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
-<<<<<<< HEAD
 const paymentsRoutes = require("./routes/paymentsRoutes");
 const paymentsController = require("./controllers/paymentsController");
-=======
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
 const db = require("./Connection/db");
 const {
   getAllUsers,
@@ -34,21 +31,6 @@ app.use("/api/events", eventRoutes);
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/reviews", reviewRoutes);
-<<<<<<< HEAD
-app.use("/api/payments", paymentsRoutes);
-app.use("/api/payment", paymentsRoutes);
-app.post(
-  "/api/payment/generate-hash",
-  express.json(),
-  paymentsController.generateHash,
-);
-app.post(
-  "/api/payment/notify",
-  express.urlencoded({ extended: true }),
-  (req, res) => res.status(200).send("OK"),
-);
-=======
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
 app.put("/api/events/admin/:id", authenticateToken, requireAdmin, updateEvent);
 app.delete(
   "/api/events/admin/:id",

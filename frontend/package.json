@@ -3,11 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
     "@stripe/react-stripe-js": "^6.3.0",
     "@stripe/stripe-js": "^9.4.0",
-=======
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -16,10 +13,7 @@
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
     "react": "^19.2.6",
-<<<<<<< HEAD
     "react-bootstrap": "^2.10.10",
-=======
->>>>>>> 0ff0ef39da892de6623d833369d7cab4a86145d0
     "react-countup": "^6.5.3",
     "react-dom": "^19.2.6",
     "react-intersection-observer": "^10.0.3",
