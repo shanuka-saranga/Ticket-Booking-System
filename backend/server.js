@@ -7,6 +7,7 @@ const userRoutes = require("./routes/userRoutes");
 const eventRoutes = require("./routes/eventRoutes");
 const galleryRoutes = require("./routes/galleryRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
+const reviewRoutes = require("./routes/reviewRoutes");
 const db = require("./Connection/db");
 const {
   getAllUsers,
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use("/api/events", eventRoutes);
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/bookings", bookingRoutes);
+app.use("/api/reviews", reviewRoutes);
 app.put("/api/events/admin/:id", authenticateToken, requireAdmin, updateEvent);
 app.delete(
   "/api/events/admin/:id",
@@ -57,6 +59,7 @@ const startServer = async () => {
   try {
     await db.ensureBookingsAutoIncrement();
     await db.ensurePaymentsAutoIncrement();
+    await db.ensureReviewsAutoIncrement();
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });

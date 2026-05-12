@@ -32,7 +32,9 @@ const ensureAutoIncrement = async (tableName) => {
 
 const ensureBookingsAutoIncrement = async () => ensureAutoIncrement("bookings");
 const ensurePaymentsAutoIncrement = async () => ensureAutoIncrement("payments");
+const ensureReviewsAutoIncrement = async () => ensureAutoIncrement("reviews");
 
 module.exports = db;
 module.exports.ensureBookingsAutoIncrement = ensureBookingsAutoIncrement;
 module.exports.ensurePaymentsAutoIncrement = ensurePaymentsAutoIncrement;
+module.exports.ensureReviewsAutoIncrement = ensureReviewsAutoIncrement;
