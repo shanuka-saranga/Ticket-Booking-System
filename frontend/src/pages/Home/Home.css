@@ -129,7 +129,7 @@
  .event-card {
      border-radius: 10px;
      overflow: hidden;
-     background: #fff;
+     background: var(--card-bg);
      transition: transform 0.3s ease;
  }
 
