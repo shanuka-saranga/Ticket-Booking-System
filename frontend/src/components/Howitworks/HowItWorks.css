@@ -1,0 +1,88 @@
+.how-it-works {
+    background-color: #f8f9fa;
+    /* ලස්සන ලා අළු පැහැති පසුබිමක් */
+}
+
+.section-title {
+    font-size: 2.5rem;
+    color: #212529;
+}
+
+.title-underline {
+    width: 60px;
+    height: 4px;
+    background-color: #ff4d4d;
+    /* ඔයාගේ රතු/තැඹිලි පාට */
+    border-radius: 2px;
+}
+
+/* Step Card Styles */
+.step-card {
+    background: white;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+    height: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.step-card:hover {
+    transform: translateY(-10px);
+    /* Hover කරද්දී උඩට යනවා */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Step Number Badge */
+.step-number {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ff4d4d;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 3px solid white;
+}
+
+/* Icon Styling */
+.icon-box {
+    width: 70px;
+    height: 70px;
+    background: rgba(255, 77, 77, 0.1);
+    color: #ff4d4d;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 2.2rem;
+}
+
+.step-card h4 {
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.step-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Responsive adjustments for 4-column grid */
+@media (max-width: 992px) {
+    .icon-box {
+        width: 65px;
+        height: 65px;
+        font-size: 2rem;
+    }
+
+    .step-card h4 {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,41 @@
+.stats-container {
+    background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1350&q=80');
+    /* ඔයාට කැමති image එකක් දාන්න */
+    background-attachment: fixed;
+    /* Parallax effect එකක් ලැබෙනවා */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+.stats-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Dark overlay එක */
+    padding: 80px 20px;
+    width: 100%;
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.stat-divider {
+    width: 50px;
+    height: 2px;
+    background-color: white;
+    margin: 15px auto;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}

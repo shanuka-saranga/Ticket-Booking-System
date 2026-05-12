@@ -1,0 +1,233 @@
+.event-details-page {
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--page-bg) 0%, var(--page-bg) 100%);
+    padding-top: 76px;
+}
+
+.event-details-shell {
+    background: var(--card-bg);
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.event-details-image-col {
+    position: relative;
+    min-height: 560px;
+    background: var(--surface-2);
+}
+
+.event-details-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.event-details-overlay {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    padding: 18px;
+    border-radius: 16px;
+    backdrop-filter: blur(6px);
+}
+
+.overlay-label,
+.details-badge {
+    display: inline-block;
+    background: rgba(230, 126, 34, 0.15);
+    color: #e67e22;
+    border: 1px solid rgba(230, 126, 34, 0.28);
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.event-details-overlay h2 {
+    margin: 12px 0 8px;
+    font-size: 1.75rem;
+    font-weight: 800;
+}
+
+.event-details-overlay p {
+    margin: 0;
+    opacity: 0.95;
+}
+
+.event-details-content-col {
+    background: var(--card-bg);
+}
+
+.event-details-content {
+    padding: 34px;
+}
+
+.event-details-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.event-details-meta {
+    color: var(--text-muted);
+}
+
+.event-details-description {
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+}
+
+.event-details-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.info-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.info-card span {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.info-card strong {
+    color: var(--text-primary);
+    font-size: 0.98rem;
+}
+
+.ticket-category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.ticket-category-btn {
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+}
+
+.ticket-category-btn small {
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.ticket-category-btn:hover,
+.ticket-category-btn.active {
+    border-color: var(--accent);
+    box-shadow: 0 8px 20px rgba(230, 126, 34, 0.12);
+    transform: translateY(-1px);
+    color: var(--accent);
+}
+
+.selected-price-box {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    font-weight: 800;
+}
+
+.event-cart-btn {
+    height: 40px;
+}
+
+@media (max-width: 991px) {
+    .event-details-image-col {
+        min-height: 360px;
+    }
+
+    .event-details-content {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .event-details-page {
+        padding-top: 70px;
+    }
+
+    .event-details-image-col {
+        min-height: 320px;
+    }
+
+    .event-details-content {
+        padding: 22px;
+    }
+
+    .event-details-info-grid,
+    .ticket-category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .event-details-page {
+        padding-top: 70px;
+    }
+
+    .event-details-shell {
+        border-radius: 18px;
+    }
+
+    .event-details-image-col {
+        min-height: 260px;
+    }
+
+    .event-details-content {
+        padding: 18px;
+    }
+
+    .event-details-info-grid,
+    .ticket-category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .event-details-title {
+        font-size: 1.6rem;
+    }
+
+    .event-details-overlay h2 {
+        font-size: 1.3rem;
+    }
+
+    .event-details-overlay {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        padding: 14px;
+    }
+
+    .ticket-category-btn,
+    .event-cart-btn {
+        width: 100%;
+    }
+}
