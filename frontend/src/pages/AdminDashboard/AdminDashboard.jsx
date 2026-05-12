@@ -44,6 +44,35 @@ const AdminDashboard = () => {
     }
   }, [navigate, role]);
 
+  // Prevent navigating back to the login page while admin is logged in
+  const preventBackToLogin = () => {
+    // push a dummy state so Back has nowhere useful to go
+    try {
+      window.history.pushState(null, "", window.location.href);
+    } catch (e) {
+      // ignore in environments where history is restricted
+    }
+
+    const onPop = () => {
+      try {
+        window.history.pushState(null, "", window.location.href);
+      } catch (e) {
+        // noop
+      }
+    };
+
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  };
+
+  useEffect(() => {
+    if (role === "admin" && token) {
+      const cleanup = preventBackToLogin();
+      return cleanup;
+    }
+    return undefined;
+  }, [role, token]);
+
   const userStats = useMemo(() => {
     const total = users.length;
     const admins = users.filter((item) => item.role === "admin").length;
