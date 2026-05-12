@@ -1,7 +1,16 @@
 const BookingModel = require("../models/bookingModel");
+const PaymentModel = require("../models/paymentModel");
+
+const buildTransactionId = (paymentMethod, bookingId, index) => {
+  const safeMethod = String(paymentMethod || "payment")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-");
+  return `TXN-${safeMethod}-${bookingId}-${Date.now()}-${index + 1}`;
+};
 
 exports.createBookings = async (req, res) => {
-  const { userId, bookings } = req.body;
+  const { userId, bookings, payment } = req.body;
 
   try {
     if (!userId) {
@@ -12,42 +21,88 @@ exports.createBookings = async (req, res) => {
       return res.status(400).json({ message: "bookings array is required" });
     }
 
-    const createdBookings = [];
+    const normalizedPayment = payment || {};
+    const paymentMethod = String(normalizedPayment.paymentMethod || "card")
+      .trim()
+      .toLowerCase();
+    const paymentStatus = "success";
 
-    for (const booking of bookings) {
-      const eventId = booking.eventId || booking.event_id;
-      const totalAmount = Number(
-        booking.totalAmount || booking.total_amount || 0,
-      );
-      const status = booking.status || "confirmed";
+    const connection = await BookingModel.getConnection();
+    try {
+      await connection.beginTransaction();
 
-      if (!eventId) {
-        return res
-          .status(400)
-          .json({ message: "eventId is required for each booking" });
+      const createdBookings = [];
+
+      for (let index = 0; index < bookings.length; index += 1) {
+        const booking = bookings[index];
+        const eventId = booking.eventId || booking.event_id;
+        const totalAmount = Number(
+          booking.totalAmount || booking.total_amount || 0,
+        );
+        const status = booking.status || "confirmed";
+
+        if (!eventId) {
+          await connection.rollback();
+          return res
+            .status(400)
+            .json({ message: "eventId is required for each booking" });
+        }
+
+        const bookingId = await BookingModel.create(
+          {
+            userId,
+            eventId,
+            totalAmount,
+            status,
+          },
+          connection,
+        );
+
+        const transactionId = buildTransactionId(
+          paymentMethod,
+          bookingId,
+          index,
+        );
+
+        await PaymentModel.create(
+          {
+            bookingId,
+            paymentMethod,
+            transactionId,
+            amount: totalAmount,
+            status: paymentStatus,
+          },
+          connection,
+        );
+
+        createdBookings.push({
+          id: bookingId,
+          user_id: userId,
+          event_id: eventId,
+          booking_date: new Date().toISOString(),
+          total_amount: totalAmount,
+          status,
+          payment: {
+            payment_method: paymentMethod,
+            transaction_id: transactionId,
+            amount: totalAmount,
+            payment_status: paymentStatus,
+          },
+        });
       }
 
-      const id = await BookingModel.create({
-        userId,
-        eventId,
-        totalAmount,
-        status,
-      });
+      await connection.commit();
 
-      createdBookings.push({
-        id,
-        user_id: userId,
-        event_id: eventId,
-        booking_date: new Date().toISOString(),
-        total_amount: totalAmount,
-        status,
+      res.status(201).json({
+        message: "Booking created successfully",
+        bookings: createdBookings,
       });
+    } catch (transactionError) {
+      await connection.rollback();
+      throw transactionError;
+    } finally {
+      connection.release();
     }
-
-    res.status(201).json({
-      message: "Booking created successfully",
-      bookings: createdBookings,
-    });
   } catch (err) {
     res
       .status(500)

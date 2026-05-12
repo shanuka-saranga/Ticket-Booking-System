@@ -1,8 +1,8 @@
 const db = require("../Connection/db");
 
 const BookingModel = {
-  create: async ({ userId, eventId, totalAmount, status }) => {
-    const [result] = await db.query(
+  create: async ({ userId, eventId, totalAmount, status }, connection = db) => {
+    const [result] = await connection.query(
       "INSERT INTO bookings (user_id, event_id, booking_date, total_amount, status) VALUES (?, ?, NOW(), ?, ?)",
       [userId, eventId, totalAmount, status],
     );
@@ -42,6 +42,8 @@ const BookingModel = {
 
     return rows;
   },
+
+  getConnection: async () => db.getConnection(),
 
   deleteById: async (id) => {
     const [result] = await db.query("DELETE FROM bookings WHERE id = ?", [id]);
