@@ -1,5 +1,98 @@
+:root {
+  --page-bg: #f7f8fb;
+  --surface: rgba(255, 255, 255, 0.92);
+  --surface-2: rgba(248, 250, 252, 0.96);
+  --card-bg: #ffffff;
+  --text-primary: #0f172a;
+  --text-muted: #64748b;
+  --border-color: rgba(148, 163, 184, 0.22);
+  --shadow-color: rgba(15, 23, 42, 0.08);
+  --navbar-bg: rgba(2, 21, 41, 0.92);
+  --navbar-text: #ffffff;
+  --footer-bg: linear-gradient(135deg, #0f172a 0%, #1a1f35 100%);
+  --footer-text: #e0e7ff;
+  --footer-muted: #b0b9d4;
+  --accent: #f97316;
+  --accent-strong: #c2410c;
+  --accent-soft: #fff7ed;
+}
+
+[data-theme="dark"] {
+  --page-bg: #07111f;
+  --surface: rgba(10, 16, 30, 0.94);
+  --surface-2: rgba(15, 23, 42, 0.94);
+  --card-bg: #0f172a;
+  --text-primary: #e5eefb;
+  --text-muted: #a3b1c6;
+  --border-color: rgba(148, 163, 184, 0.2);
+  --shadow-color: rgba(0, 0, 0, 0.26);
+  --navbar-bg: rgba(5, 12, 24, 0.96);
+  --navbar-text: #f8fafc;
+  --footer-bg: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+  --footer-text: #dbeafe;
+  --footer-muted: #94a3b8;
+  --accent-soft: rgba(249, 115, 22, 0.18);
+  --accent-strong: #fdba74;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--page-bg);
+}
+
 body {
   margin: 0;
-  font-family: poppins, sans-serif;
+  font-family: Poppins, sans-serif;
+  background: var(--page-bg);
+  color: var(--text-primary);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
 
+body .text-muted {
+  color: var(--text-muted) !important;
+}
+
+body .bg-light {
+  background-color: var(--surface-2) !important;
+}
+
+body .bg-white,
+body .card,
+body .table-responsive,
+body .table,
+body .modal-content,
+body .dropdown-menu {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+}
+
+body .table> :not(caption)>*>* {
+  background-color: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+body .table thead {
+  color: var(--text-muted);
+}
+
+body .alert-success {
+  background-color: rgba(34, 197, 94, 0.12);
+  color: var(--text-primary);
+  border-color: rgba(34, 197, 94, 0.18);
+}
+
+body .form-control,
+body .form-select {
+  background-color: var(--surface-2);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+body .form-control:focus,
+body .form-select:focus {
+  color: var(--text-primary);
+  background-color: var(--surface-2);
+  border-color: rgba(249, 115, 22, 0.5);
+  box-shadow: 0 0 0 0.25rem rgba(249, 115, 22, 0.12);
 }

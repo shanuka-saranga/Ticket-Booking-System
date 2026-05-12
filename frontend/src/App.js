@@ -57,7 +57,10 @@ const AuthHistoryGuard = () => {
       return undefined;
     }
 
-    if ((currentPath === "/" || currentPath === "/home") && !homeStateSeeded.current) {
+    if (
+      (currentPath === "/" || currentPath === "/home") &&
+      !homeStateSeeded.current
+    ) {
       homeStateSeeded.current = true;
       window.history.pushState(
         { ...(window.history.state || {}), authHomeLocked: true },

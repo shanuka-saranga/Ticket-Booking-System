@@ -26,15 +26,19 @@
  .search-bar-pill {
      border-radius: 999px;
      overflow: hidden;
-     background: #ffffff;
+    background: var(--surface);
      padding: 0.25rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 14px 34px var(--shadow-color);
  }
 
  .search-bar-input {
-     border: none;
+    border: none;
      border-radius: 999px 0 0 999px !important;
      box-shadow: none !important;
      padding: 0.9rem 1.25rem;
+    background: transparent;
+    color: var(--text-primary);
  }
 
  .search-bar-input:focus {
@@ -42,21 +46,28 @@
      box-shadow: none !important;
  }
 
+.search-bar-input::placeholder {
+    color: var(--text-muted);
+    opacity: 1;
+}
+
  .search-bar-btn {
-     color: #ffffff;
+    color: var(--navbar-text);
      border: none;
      border-radius: 999px !important;
      min-width: 60px;
      display: flex;
      align-items: center;
      justify-content: center;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
  }
 
  .search-bar-btn:hover,
  .search-bar-btn:focus,
  .search-bar-btn:active {
-     color: #ffffff;
+    color: var(--navbar-text);
      box-shadow: none;
+    background: linear-gradient(135deg, var(--accent-strong) 0%, var(--accent) 100%);
  }
 
  /* Upcoming Events Styles */
