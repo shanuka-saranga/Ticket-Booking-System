@@ -6,6 +6,6 @@
 }
 
 body {
-  background-color: #f8f9fa;
-  /* අපි කලින් කතා කරපු සුදු පාටට හුරු background එක */
+  background-color: var(--page-bg);
+  color: var(--text-primary);
 }

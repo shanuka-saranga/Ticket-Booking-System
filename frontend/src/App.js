@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   BrowserRouter as Router,
   Navigate,
   Routes,
   Route,
+  useNavigate,
   useLocation,
 } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
@@ -18,6 +19,7 @@ import Cart from "./pages/Cart/Cart";
 import Gallery from "./pages/Gallery/Gallery";
 import Contact from "./pages/Contact/Contact";
 import MyBookings from "./pages/MyBookings/MyBookings";
+import ProfileSettings from "./pages/ProfileSettings/ProfileSettings";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -34,6 +36,55 @@ const AuthRoute = ({ element }) => {
   }
 
   return element;
+};
+
+const AuthHistoryGuard = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const token = localStorage.getItem("token");
+  const homeStateSeeded = useRef(false);
+
+  useEffect(() => {
+    if (!token) {
+      homeStateSeeded.current = false;
+      return undefined;
+    }
+
+    const currentPath = location.pathname.toLowerCase();
+
+    if (currentPath === "/login" || currentPath === "/register") {
+      navigate("/home", { replace: true });
+      return undefined;
+    }
+
+    if ((currentPath === "/" || currentPath === "/home") && !homeStateSeeded.current) {
+      homeStateSeeded.current = true;
+      window.history.pushState(
+        { ...(window.history.state || {}), authHomeLocked: true },
+        "",
+        window.location.href,
+      );
+    }
+
+    return undefined;
+  }, [token, location.pathname, navigate]);
+
+  useEffect(() => {
+    if (!token) return undefined;
+
+    const handlePopState = () => {
+      const currentPath = window.location.pathname.toLowerCase();
+
+      if (currentPath === "/login" || currentPath === "/register") {
+        navigate("/home", { replace: true });
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [token, navigate]);
+
+  return null;
 };
 
 const Layout = ({ children }) => {
@@ -63,6 +114,7 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <AuthHistoryGuard />
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -72,6 +124,7 @@ function App() {
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/my-bookings" element={<MyBookings />} />
+            <Route path="/profile/settings" element={<ProfileSettings />} />
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/login" element={<AuthRoute element={<Login />} />} />
