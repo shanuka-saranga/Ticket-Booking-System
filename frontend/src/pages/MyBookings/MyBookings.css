@@ -1,6 +1,6 @@
 .my-bookings-page {
     overflow-x: hidden;
-    background-color: #f8f9fa;
+    background-color: var(--page-bg);
 }
 
 .my-bookings-header {
@@ -8,14 +8,14 @@
 }
 
 .my-bookings-title {
-    color: #111;
+    color: var(--text-primary);
     font-size: 2.6rem;
     font-weight: 800;
     margin-bottom: 14px;
 }
 
 .my-bookings-subtitle {
-    color: #6c757d;
+    color: var(--text-muted);
     font-size: 1.05rem;
     max-width: 760px;
 }
@@ -25,7 +25,7 @@
 }
 
 .empty-bookings-card {
-    background: #fff;
+    background: var(--card-bg);
     border-radius: 16px;
     padding: 56px 24px;
     box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
@@ -41,17 +41,17 @@
 
 .empty-bookings-card h4 {
     font-weight: 800;
-    color: #111827;
+    color: var(--text-primary);
     margin-bottom: 10px;
 }
 
 .empty-bookings-card p {
-    color: #6b7280;
+    color: var(--text-muted);
     margin-bottom: 24px;
 }
 
 .booking-summary-bar {
-    background: #fff;
+    background: var(--card-bg);
     border-radius: 16px;
     padding: 18px 22px;
     box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
@@ -65,7 +65,7 @@
 .booking-summary-bar .summary-label {
     display: block;
     font-size: 0.85rem;
-    color: #6b7280;
+    color: var(--text-muted);
     margin-bottom: 6px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -75,11 +75,11 @@
     margin: 0;
     font-size: 1.1rem;
     font-weight: 800;
-    color: #111827;
+    color: var(--text-primary);
 }
 
 .booking-card {
-    background: #fff;
+    background: var(--card-bg);
     border-radius: 16px;
     padding: 22px;
     box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
@@ -98,12 +98,12 @@
 .booking-event-title {
     font-size: 1.2rem;
     font-weight: 800;
-    color: #111827;
+    color: var(--text-primary);
     margin-bottom: 6px;
 }
 
 .booking-location {
-    color: #6b7280;
+    color: var(--text-muted);
 }
 
 .status-pill {
@@ -131,14 +131,14 @@
 .booking-meta-grid span {
     display: block;
     font-size: 0.78rem;
-    color: #6b7280;
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.04em;
     margin-bottom: 4px;
 }
 
 .booking-meta-grid strong {
-    color: #111827;
+    color: var(--text-primary);
 }
 
 .booking-card-actions {
@@ -161,7 +161,7 @@
 .booking-modal {
     width: 100%;
     max-width: 620px;
-    background: #fff;
+    background: var(--card-bg);
     border-radius: 18px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
     overflow: hidden;
@@ -172,20 +172,20 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px 22px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .booking-modal-header h4 {
     margin: 0;
     font-weight: 800;
-    color: #111827;
+    color: var(--text-primary);
 }
 
 .modal-close-btn {
     background: none;
     border: none;
     font-size: 1.1rem;
-    color: #6b7280;
+    color: var(--text-muted);
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -202,16 +202,16 @@
     justify-content: space-between;
     gap: 16px;
     padding-bottom: 12px;
-    border-bottom: 1px solid #f3f4f6;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .detail-row span {
-    color: #6b7280;
+    color: var(--text-muted);
     font-size: 0.92rem;
 }
 
 .detail-row strong {
-    color: #111827;
+    color: var(--text-primary);
     text-align: right;
 }
 
