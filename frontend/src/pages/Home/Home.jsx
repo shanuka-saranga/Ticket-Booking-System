@@ -13,6 +13,18 @@ const Home = () => {
   const [showMore, setShowMore] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [showSearchResults, setShowSearchResults] = useState(false);
+  const [reviews, setReviews] = useState([]);
+  const [newReview, setNewReview] = useState({
+    rating: 5,
+    comment: "",
+  });
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+
+  const token = localStorage.getItem("token");
+  const userStr = localStorage.getItem("user");
+  const userData = userStr ? JSON.parse(userStr) : null;
+  const userId = userData?.id || userData?.user_id;
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -24,6 +36,20 @@ const Home = () => {
       }
     };
     fetchEvents();
+  }, []);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:5000/api/reviews/recent?limit=6",
+        );
+        setReviews(res.data);
+      } catch (err) {
+        console.error("Error fetching reviews", err);
+      }
+    };
+    fetchReviews();
   }, []);
 
   const visibleEvents = events.slice(0, 3);
@@ -55,6 +81,95 @@ const Home = () => {
     setSearchQuery("");
     setShowSearchResults(false);
     handleGetTicket(event);
+  };
+
+  const handleSubmitReview = async (e) => {
+    e.preventDefault();
+    if (!token) {
+      setSubmitError("Please log in to submit a review");
+      return;
+    }
+
+    if (!userId) {
+      setSubmitError("User information not found. Please log in again.");
+      return;
+    }
+
+    if (!newReview.comment.trim()) {
+      setSubmitError("Please enter a comment");
+      return;
+    }
+
+    setSubmitLoading(true);
+    setSubmitError("");
+
+    try {
+      const reviewData = {
+        userId: userId,
+        eventId: events[0]?.id || 1,
+        rating: newReview.rating,
+        comment: newReview.comment,
+      };
+
+      console.log(
+        "Submitting review with token:",
+        token?.substring(0, 20) + "...",
+      );
+      console.log("Submitting review data:", reviewData);
+
+      const response = await axios.post(
+        "http://localhost:5000/api/reviews",
+        reviewData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      console.log("Review submitted successfully:", response.data);
+
+      setNewReview({ rating: 5, comment: "" });
+
+      // Refresh reviews list
+      const reviewsRes = await axios.get(
+        "http://localhost:5000/api/reviews/recent?limit=6",
+      );
+      setReviews(reviewsRes.data);
+
+      // Show success message briefly
+      setSubmitError("");
+    } catch (err) {
+      const errorMessage =
+        err.response?.data?.message ||
+        err.response?.data?.error ||
+        err.message ||
+        "Failed to submit review";
+      console.error("Review submission error:", {
+        status: err.response?.status,
+        message: errorMessage,
+        fullError: err,
+      });
+      setSubmitError(errorMessage);
+    } finally {
+      setSubmitLoading(false);
+    }
+  };
+
+  const renderStars = (rating) => {
+    return Array(5)
+      .fill(0)
+      .map((_, i) => (
+        <i
+          key={i}
+          className={`bi bi-star${i < rating ? "-fill" : ""}`}
+          style={{
+            color: i < rating ? "#f97316" : "#cbd5e1",
+            marginRight: "2px",
+          }}
+        />
+      ));
   };
 
   return (
@@ -258,6 +373,157 @@ const Home = () => {
           {/* Hero, Categories etc. */}
           <HowItWorks />
           {/* Events section etc. */}
+        </div>
+
+        {/* --- Reviews Section --- */}
+        <div className="reviews-section mt-5 pt-4">
+          <div className="mb-4">
+            <h2 className="fw-bold section-title text-uppercase">
+              Community Reviews
+            </h2>
+            <p className="text-muted small">
+              Share your experience and read what others loved about our events
+            </p>
+          </div>
+
+          {/* Review Form */}
+          <div className="row g-4 mb-5">
+            <div className="col-lg-5">
+              <div className="review-form-card shadow-sm">
+                <h5 className="fw-bold mb-3">
+                  <i className="bi bi-pencil-square me-2"></i>Add Your Review
+                </h5>
+
+                {submitError && (
+                  <div
+                    className="alert alert-warning alert-dismissible fade show"
+                    role="alert"
+                  >
+                    {submitError}
+                    <button
+                      type="button"
+                      className="btn-close"
+                      onClick={() => setSubmitError("")}
+                    />
+                  </div>
+                )}
+
+                {!token ? (
+                  <div className="alert alert-info">
+                    <i className="bi bi-info-circle me-2"></i>
+                    Please{" "}
+                    <a href="/login" className="alert-link">
+                      log in
+                    </a>{" "}
+                    to submit a review.
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmitReview}>
+                    <div className="mb-3">
+                      <label className="form-label fw-semibold">Rating</label>
+                      <div className="d-flex gap-2">
+                        {[1, 2, 3, 4, 5].map((rate) => (
+                          <button
+                            key={rate}
+                            type="button"
+                            className={`rating-star-btn ${newReview.rating >= rate ? "active" : ""}`}
+                            onClick={() =>
+                              setNewReview({ ...newReview, rating: rate })
+                            }
+                          >
+                            <i className="bi bi-star-fill"></i>
+                          </button>
+                        ))}
+                      </div>
+                      <small className="text-muted">
+                        {newReview.rating} out of 5 stars
+                      </small>
+                    </div>
+
+                    <div className="mb-3">
+                      <label className="form-label fw-semibold">
+                        Your Comment
+                      </label>
+                      <textarea
+                        className="form-control"
+                        rows="4"
+                        placeholder="Share your experience..."
+                        value={newReview.comment}
+                        onChange={(e) =>
+                          setNewReview({
+                            ...newReview,
+                            comment: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="btn btn-orange w-100"
+                      disabled={submitLoading}
+                    >
+                      {submitLoading ? (
+                        <>
+                          <span
+                            className="spinner-border spinner-border-sm me-2"
+                            role="status"
+                            aria-hidden="true"
+                          />
+                          Submitting...
+                        </>
+                      ) : (
+                        <>
+                          <i className="bi bi-send me-2"></i>Submit Review
+                        </>
+                      )}
+                    </button>
+                  </form>
+                )}
+              </div>
+            </div>
+
+            {/* Reviews List */}
+            <div className="col-lg-7">
+              <div className="reviews-list">
+                <h5 className="fw-bold mb-3">Recent Reviews</h5>
+
+                {reviews.length > 0 ? (
+                  <div className="row g-3">
+                    {reviews.map((review) => (
+                      <div className="col-md-6" key={review.id}>
+                        <div className="review-card shadow-sm">
+                          <div className="review-header">
+                            <div>
+                              <strong>{review.name || review.user_name}</strong>
+                              <p className="text-muted small mb-1">
+                                {review.event_title}
+                              </p>
+                            </div>
+                            <span className="review-rating">
+                              {renderStars(review.rating)}
+                            </span>
+                          </div>
+                          <p className="review-comment mb-2">
+                            {review.comment}
+                          </p>
+                          <small className="review-date">
+                            {new Date(review.created_at).toLocaleDateString()}
+                          </small>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-4">
+                    <p className="text-muted">
+                      No reviews yet. Be the first to share your experience!
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
