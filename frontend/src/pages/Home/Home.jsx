@@ -11,6 +11,8 @@ const Home = () => {
   const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const [showMore, setShowMore] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showSearchResults, setShowSearchResults] = useState(false);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -26,9 +28,33 @@ const Home = () => {
 
   const visibleEvents = events.slice(0, 3);
   const hiddenEvents = events.slice(3);
+  const normalizedSearchQuery = searchQuery.trim().toLowerCase();
+
+  const searchResults = normalizedSearchQuery
+    ? events.filter((event) => {
+        const title = String(event.title || "").toLowerCase();
+        const location = String(event.location || "").toLowerCase();
+        return (
+          title.includes(normalizedSearchQuery) ||
+          location.includes(normalizedSearchQuery)
+        );
+      })
+    : [];
 
   const handleGetTicket = (event) => {
     navigate(`/events/${event.id}`, { state: { event } });
+  };
+
+  const handleSearch = () => {
+    if (normalizedSearchQuery) {
+      setShowSearchResults(true);
+    }
+  };
+
+  const handleSelectSearchResult = (event) => {
+    setSearchQuery("");
+    setShowSearchResults(false);
+    handleGetTicket(event);
   };
 
   return (
@@ -40,18 +66,77 @@ const Home = () => {
           <p className="hero-subtitle mb-4">
             Meet your favorite artists, sport teams and parties
           </p>
-          <div className="row justify-content-center">
+          <div className="row justify-content-center position-relative">
             <div className="col-md-7">
               <div className="input-group search-bar search-bar-pill shadow-lg">
                 <input
                   type="text"
                   className="form-control search-bar-input"
                   placeholder="Search Artist, Team, or Venue"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setShowSearchResults(true);
+                  }}
+                  onFocus={() => {
+                    if (normalizedSearchQuery) {
+                      setShowSearchResults(true);
+                    }
+                  }}
                 />
-                <button className="btn search-bar-btn" type="button">
+                <button
+                  className="btn search-bar-btn"
+                  type="button"
+                  onClick={handleSearch}
+                >
                   <i className="bi bi-search text-orange"></i>
                 </button>
               </div>
+
+              {showSearchResults && normalizedSearchQuery && (
+                <div className="search-results-panel shadow-lg">
+                  <div className="search-results-header">
+                    <span>Search Results</span>
+                    <button
+                      type="button"
+                      className="search-results-close"
+                      onClick={() => setShowSearchResults(false)}
+                    >
+                      <i className="bi bi-x-lg"></i>
+                    </button>
+                  </div>
+
+                  {searchResults.length > 0 ? (
+                    <div className="search-results-list">
+                      {searchResults.map((event) => (
+                        <button
+                          type="button"
+                          key={event.id}
+                          className="search-result-item"
+                          onClick={() => handleSelectSearchResult(event)}
+                        >
+                          <img
+                            src={event.image_url}
+                            alt={event.title}
+                            className="search-result-thumb"
+                          />
+                          <div className="search-result-copy">
+                            <strong>{event.title}</strong>
+                            <span>
+                              <i className="bi bi-geo-alt-fill me-1"></i>
+                              {event.location}
+                            </span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="search-results-empty">
+                      No matching events found.
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
