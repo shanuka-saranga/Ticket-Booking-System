@@ -186,18 +186,54 @@
 }
 
 @media (max-width: 991.98px) {
+    .transition-nav .container {
+        position: relative;
+    }
+
     .navbar-collapse {
-        background: var(--surface);
+        position: absolute;
+        top: calc(100% + 12px);
+        right: 16px;
+        left: auto;
+        width: min(340px, calc(100vw - 32px));
+        background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
         border: 1px solid var(--border-color);
-        border-radius: 18px;
+        border-radius: 20px;
         padding: 14px;
-        margin-top: 12px;
         box-shadow: 0 18px 40px var(--shadow-color);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        z-index: 1050;
+        overflow-x: hidden;
+        overflow-y: auto;
+        transform: translateY(-10px);
+        transform-origin: top center;
+        transition: opacity 0.28s ease, transform 0.28s ease, box-shadow 0.28s ease;
+        display: block;
+        max-height: calc(100vh - 92px);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .navbar-collapse.collapsing {
+        display: block;
+        max-height: calc(100vh - 92px);
+        opacity: 0.95;
+        pointer-events: none;
+    }
+
+    .navbar-collapse.show {
+        max-height: calc(100vh - 92px);
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
     }
 
     .navbar-nav {
         align-items: stretch !important;
         gap: 6px;
+        width: 100%;
+        padding-bottom: 2px;
     }
 
     .navbar-nav .nav-item {
@@ -208,10 +244,12 @@
         display: block;
         width: 100%;
         padding: 10px 12px;
+        text-align: right;
     }
 
     .navbar-nav .nav-link::after {
-        left: 0;
+        left: auto;
+        right: 12px;
         transform: none;
     }
 
@@ -222,6 +260,22 @@
         min-width: 0;
         box-shadow: none;
         border: 1px solid var(--border-color);
+        text-align: right;
+    }
+
+    .profile-dropdown .dropdown-item {
+        text-align: right;
+        padding-right: 18px;
+    }
+
+    .profile-dropdown .dropdown-item:hover {
+        padding-left: 20px;
+        padding-right: 24px;
+    }
+
+    .navbar-nav .nav-item .btn,
+    .navbar-nav .nav-item .profile-initial-btn {
+        margin-left: auto;
     }
 }
 
@@ -241,5 +295,13 @@
 
     .profile-dropdown .dropdown-item {
         padding: 10px 16px;
+    }
+
+    .navbar-collapse {
+        right: 12px;
+        top: calc(100% + 10px);
+        border-radius: 18px;
+        padding: 12px;
+        width: min(320px, calc(100vw - 24px));
     }
 }
