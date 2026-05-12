@@ -1,20 +1,20 @@
 .event-details-page {
     min-height: 100vh;
-    background: linear-gradient(180deg, #f7f7f7 0%, #ffffff 100%);
+    background: linear-gradient(180deg, var(--page-bg) 0%, var(--page-bg) 100%);
     padding-top: 76px;
 }
 
 .event-details-shell {
-    background: #fff;
+    background: var(--card-bg);
     border-radius: 22px;
     overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-color);
 }
 
 .event-details-image-col {
     position: relative;
     min-height: 560px;
-    background: #111;
+    background: var(--surface-2);
 }
 
 .event-details-image {
@@ -62,7 +62,7 @@
 }
 
 .event-details-content-col {
-    background: #fff;
+    background: var(--card-bg);
 }
 
 .event-details-content {
@@ -72,15 +72,15 @@
 .event-details-title {
     font-size: 2rem;
     font-weight: 800;
-    color: #111;
+    color: var(--text-primary);
 }
 
 .event-details-meta {
-    color: #666;
+    color: var(--text-muted);
 }
 
 .event-details-description {
-    color: #555;
+    color: var(--text-muted);
     line-height: 1.7;
     margin-bottom: 1.25rem;
 }
@@ -92,8 +92,8 @@
 }
 
 .info-card {
-    background: #fafafa;
-    border: 1px solid #ececec;
+    background: var(--surface-2);
+    border: 1px solid var(--border-color);
     border-radius: 14px;
     padding: 14px 16px;
     display: flex;
@@ -103,13 +103,13 @@
 
 .info-card span {
     font-size: 0.78rem;
-    color: #777;
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.04em;
 }
 
 .info-card strong {
-    color: #222;
+    color: var(--text-primary);
     font-size: 0.98rem;
 }
 
@@ -120,29 +120,29 @@
 }
 
 .ticket-category-btn {
-    border: 1px solid #e6e6e6;
-    background: #fff;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
     border-radius: 14px;
     padding: 12px 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-weight: 700;
-    color: #333;
+    color: var(--text-primary);
     transition: all 0.2s ease;
 }
 
 .ticket-category-btn small {
-    color: #888;
+    color: var(--text-muted);
     font-weight: 700;
 }
 
 .ticket-category-btn:hover,
 .ticket-category-btn.active {
-    border-color: #e67e22;
+    border-color: var(--accent);
     box-shadow: 0 8px 20px rgba(230, 126, 34, 0.12);
     transform: translateY(-1px);
-    color: #e67e22;
+    color: var(--accent);
 }
 
 .selected-price-box {
@@ -150,8 +150,8 @@
     display: flex;
     align-items: center;
     padding: 0 14px;
-    background: #fafafa;
-    border: 1px solid #ececec;
+    background: var(--surface-2);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     font-weight: 800;
 }
