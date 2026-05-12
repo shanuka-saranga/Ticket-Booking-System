@@ -15,13 +15,13 @@
 }
 
 .nav-scrolled {
-    background-color: #021529e9 !important;
+    background-color: var(--navbar-bg) !important;
     padding: 14px 0 !important;
 }
 
 .brand-text,
 .nav-link {
-    color: white !important;
+    color: var(--navbar-text) !important;
 }
 
 /* Nav Link එකේ මූලික සැකසුම */
@@ -43,7 +43,7 @@
     bottom: 0;
     left: 50%;
     /* මැද ඉඳන් දෙපැත්තට විහිදෙන්න */
-    background-color: white;
+    background-color: var(--navbar-text);
     /* ඉරේ පාට */
     transition: all 0.3s ease-in-out;
     transform: translateX(-50%);
@@ -58,7 +58,7 @@
 
 /* Hover වෙද්දී අකුරු වල පාට වෙනස් කරන්න ඕනේ නම් මෙතනින් පුළුවන් */
 .navbar-nav .nav-link:hover {
-    color: #f8f9fa !important;
+    color: var(--navbar-text) !important;
 }
 
 
@@ -67,8 +67,7 @@
     position: absolute;
     right: 0;
     top: 100%;
-    background: white;
-    /* Dropdown එක ඇතුළ සුදු පාටට තිබීම පැහැදිලියි */
+    background: var(--surface);
     min-width: 180px;
     border-radius: 10px;
     padding: 10px 0;
@@ -96,7 +95,7 @@
 
 /* Dropdown එක ඇතුළේ අකුරු වල පාට කළු කරන්න (සුදු background එකේ පේන්න) */
 .profile-dropdown .dropdown-item {
-    color: #333 !important;
+    color: var(--text-primary) !important;
     padding: 8px 20px;
     display: block;
     text-decoration: none;
@@ -111,8 +110,8 @@
 }
 
 .profile-dropdown .dropdown-item:hover {
-    background-color: #f8f9fa;
-    color: #e67e22 !important;
+    background-color: var(--surface-2);
+    color: var(--accent) !important;
     padding-left: 24px;
 }
 
@@ -132,7 +131,7 @@
 .profile-initial-btn {
     width: 35px;
     height: 35px;
-    background-color: #e67e22;
+    background-color: var(--accent);
     /* ලස්සන Orange පාටක් (ඔයාට කැමති පාටක් දෙන්න) */
     color: white;
     border: none;
@@ -149,7 +148,7 @@
 
 .profile-initial-btn:hover {
     transform: scale(1.1);
-    background-color: #d35400;
+    background-color: var(--accent-strong);
     /* Hover කරද්දී තද පාටක් */
 }
 
@@ -166,7 +165,7 @@
     position: absolute;
     right: 0;
     top: 100%;
-    background: white;
+    background: var(--surface);
     min-width: 180px;
     border-radius: 10px;
     padding: 10px 0;
@@ -181,7 +180,7 @@
 }
 
 .dropdown-header {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-color);
     margin-bottom: 5px;
     padding-bottom: 5px;
 }

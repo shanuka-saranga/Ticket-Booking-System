@@ -44,6 +44,7 @@ const Navbar = () => {
     "/contact",
     "/cart",
     "/my-bookings",
+    "/profile/settings",
   ];
   const currentPath = location.pathname ? location.pathname.toLowerCase() : "";
   const isNoHeroPage = noHeroPages.some((p) => currentPath.startsWith(p));
@@ -237,6 +238,7 @@ const Navbar = () => {
                       className="dropdown-item"
                       onClick={() => setProfileOpen(false)}
                     >
+                      <i className="bi bi-gear me-2"></i>
                       Settings
                     </Link>
                     <div className="dropdown-divider"></div>
