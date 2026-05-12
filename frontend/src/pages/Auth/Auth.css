@@ -1,0 +1,83 @@
+/* මුළු පිටුවේම පසුබිම වෙනස් කිරීමට */
+.auth-container {
+    background: linear-gradient(135deg, #caccd4 0%, #95a8e8 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Login/Register Card එක අලංකාර කිරීමට */
+.auth-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    transition: transform 0.3s ease;
+}
+
+.auth-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Heading එකට style එකක් */
+.auth-title {
+    font-weight: 700;
+    color: #333;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+/* Input Fields වලට style එකක් */
+.form-control {
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 10px rgba(118, 75, 162, 0.2);
+    border-color: #764ba2;
+}
+
+/* Submit Button එකට style එකක් */
+.auth-btn {
+    padding: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    background: #764ba2;
+    border: none;
+    color: white;
+    transition: 0.3s;
+}
+
+.auth-btn:hover {
+    background: #5a397e;
+    cursor: pointer;
+}
+
+/* Register/Login Link එක */
+.auth-link {
+    color: #764ba2;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}
+
+.forgot-link {
+    font-weight: 600;
+    color: #5a397e;
+    text-decoration: none;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+.reset-form {
+    border-top: 1px solid #ececec;
+    padding-top: 14px;
+}

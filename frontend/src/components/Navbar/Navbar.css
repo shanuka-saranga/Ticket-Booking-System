@@ -1,0 +1,187 @@
+/* --- ඔයාගේ පරණ Styles (මම මේවා වෙනස් කළේ නැහැ) --- */
+.transition-nav {
+    transition: all 0.4s ease-in-out;
+}
+
+.transition-nav,
+.nav-transparent,
+.nav-scrolled {
+    min-height: 78px;
+}
+
+.nav-transparent {
+    background-color: transparent !important;
+    padding: 14px 0;
+}
+
+.nav-scrolled {
+    background-color: #021529e9 !important;
+    padding: 14px 0 !important;
+}
+
+.brand-text,
+.nav-link {
+    color: white !important;
+}
+
+/* Nav Link එකේ මූලික සැකසුම */
+.navbar-nav .nav-link {
+    position: relative;
+    /* Underline එක position කරන්න අවශ්‍යයි */
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+/* Underline එක (පෙරනිමියෙන් නොපෙනෙන ලෙස) */
+.navbar-nav .nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    /* මුලින් දිග 0 යි */
+    height: 2px;
+    /* ඉරේ මහත */
+    bottom: 0;
+    left: 50%;
+    /* මැද ඉඳන් දෙපැත්තට විහිදෙන්න */
+    background-color: white;
+    /* ඉරේ පාට */
+    transition: all 0.3s ease-in-out;
+    transform: translateX(-50%);
+    /* හරියටම මැදට ගන්න */
+}
+
+/* Hover කළ විට ඉර දිග හැරෙන ආකාරය */
+.navbar-nav .nav-link:hover::after {
+    width: 80%;
+    /* Link එකේ දිගෙන් 80% ක් පේන්න */
+}
+
+/* Hover වෙද්දී අකුරු වල පාට වෙනස් කරන්න ඕනේ නම් මෙතනින් පුළුවන් */
+.navbar-nav .nav-link:hover {
+    color: #f8f9fa !important;
+}
+
+
+/* --- අලුතින් එක් කළ Dropdown Styles --- */
+.profile-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: white;
+    /* Dropdown එක ඇතුළ සුදු පාටට තිබීම පැහැදිලියි */
+    min-width: 180px;
+    border-radius: 10px;
+    padding: 10px 0;
+    z-index: 1000;
+    margin-top: 15px;
+    display: none;
+}
+
+.profile-dropdown.open {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Dropdown එක ඇතුළේ අකුරු වල පාට කළු කරන්න (සුදු background එකේ පේන්න) */
+.profile-dropdown .dropdown-item {
+    color: #333 !important;
+    padding: 8px 20px;
+    display: block;
+    text-decoration: none;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    transition: all 0.2s ease;
+}
+
+.profile-dropdown .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #e67e22 !important;
+    padding-left: 24px;
+}
+
+.profile-btn {
+    border: none;
+    box-shadow: none;
+}
+
+/* Cart Badge එක රතු පාටින් පේන්න */
+.badge {
+    padding: 3px 6px !important;
+    color: white !important;
+}
+
+
+/* Profile Initial Button Styling */
+.profile-initial-btn {
+    width: 35px;
+    height: 35px;
+    background-color: #e67e22;
+    /* ලස්සන Orange පාටක් (ඔයාට කැමති පාටක් දෙන්න) */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.profile-initial-btn:hover {
+    transform: scale(1.1);
+    background-color: #d35400;
+    /* Hover කරද්දී තද පාටක් */
+}
+
+.profile-image-display {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Dropdown එක Profile රවුමට ගැලපෙන විදියට හදමු */
+.profile-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: white;
+    min-width: 180px;
+    border-radius: 10px;
+    padding: 10px 0;
+    z-index: 1000;
+    margin-top: 12px;
+    /* රවුමට ටිකක් පල්ලෙහාවෙන් */
+    display: none;
+}
+
+.profile-dropdown.open {
+    display: block;
+}
+
+.dropdown-header {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}

@@ -1,0 +1,218 @@
+/* Filter Bar Section */
+.events-container {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.filter-bar-section {
+    background-color: transparent;
+    padding: 6px 0;
+    margin-bottom: 24px;
+    margin-top: 76px;
+    position: relative;
+}
+
+.filter-bar {
+    background: white;
+    padding: 10px 14px;
+    border-radius: 6px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.filter-title {
+    color: #333;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.filter-bar .form-label {
+    color: #555;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+}
+
+.filter-bar .form-select,
+.filter-bar .form-control {
+    border: 1px solid #eee;
+    border-radius: 4px;
+    padding: 0.32rem 0.45rem;
+    font-size: 0.88rem;
+    transition: border-color 0.2s ease;
+    width: 100%;
+    max-width: 220px;
+}
+
+.filter-bar .form-select:focus,
+.filter-bar .form-control:focus {
+    border-color: #e67e22;
+    box-shadow: 0 0 0 0.2rem rgba(230, 126, 34, 0.15);
+}
+
+.filter-bar .btn-outline-secondary {
+    border-color: #e6e6e6;
+    color: #666;
+    font-size: 0.85rem;
+    padding: 0.35rem 0.9rem;
+}
+
+.filter-bar .btn-outline-secondary:hover {
+    background-color: #f0f0f0;
+    border-color: #999;
+    color: #333;
+}
+
+/* Event Cards */
+.event-card {
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15) !important;
+}
+
+.event-image-container {
+    position: relative;
+    height: 200px;
+}
+
+.event-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Events Display Container */
+.events-display {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+/* Date Badge */
+.date-badge {
+    position: absolute;
+    top: 0;
+    left: 15px;
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-width: 60px;
+    border-radius: 0 0 8px 0;
+}
+
+.date-badge .day {
+    font-size: 1.6rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.date-badge .month {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+}
+
+/* Event Details */
+.event-details {
+    padding: 1rem !important;
+}
+
+.event-details h5 {
+    color: #333;
+    font-size: 1rem;
+}
+
+.event-details p {
+    color: #666;
+    margin-bottom: 0.75rem;
+}
+
+/* Button Styling */
+.btn-orange {
+    background-color: #e67e22;
+    color: white;
+    font-weight: bold;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-orange:hover {
+    background-color: #d35400;
+    color: white;
+    transform: scale(1.02);
+}
+
+/* Match search button style for event GET TICKET buttons */
+.event-get-btn {
+    background-color: #e67e22 !important;
+    color: #ffffff;
+    border: none;
+    border-radius: 999px;
+    min-width: 60px;
+    height: 40px;
+    padding: 0 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    gap: 8px;
+}
+
+.event-get-btn i {
+    font-size: 1rem;
+}
+
+.event-get-btn:hover,
+.event-get-btn:focus,
+.event-get-btn:active {
+    background-color: #d35400;
+    color: #fff;
+    box-shadow: none;
+    transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .filter-bar {
+        padding: 8px 10px;
+    }
+
+    .filter-title {
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+    }
+
+    .event-image-container {
+        height: 160px;
+    }
+
+    .filter-bar .row {
+        margin-left: -0.4rem;
+        margin-right: -0.4rem;
+    }
+
+    .filter-bar .col-md-6,
+    .filter-bar .col-lg-3 {
+        padding-left: 0.4rem;
+        padding-right: 0.4rem;
+    }
+
+    .filter-bar-section {
+        margin-top: 76px;
+        padding: 6px 0;
+        margin-bottom: 18px;
+    }
+
+    .filter-bar .form-select,
+    .filter-bar .form-control {
+        max-width: none;
+    }
+}

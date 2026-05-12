@@ -1,0 +1,211 @@
+ .home-container {
+     overflow-x: hidden;
+     position: relative;
+ }
+
+ /* Hero Section Styles */
+ .hero-section {
+     background: linear-gradient(135deg, rgba(231, 76, 60, 0.8) 0%, rgba(243, 156, 18, 0.8) 100%),
+         url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2070') no-repeat center center/cover;
+     height: 450px;
+     padding-top: 76px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+
+ .hero-title {
+     font-family: 'Poppins', sans-serif;
+     font-size: 3rem;
+ }
+
+ .text-orange {
+     color: #e67e22;
+ }
+
+ .search-bar-pill {
+     border-radius: 999px;
+     overflow: hidden;
+     background: #ffffff;
+     padding: 0.25rem;
+ }
+
+ .search-bar-input {
+     border: none;
+     border-radius: 999px 0 0 999px !important;
+     box-shadow: none !important;
+     padding: 0.9rem 1.25rem;
+ }
+
+ .search-bar-input:focus {
+     border: none;
+     box-shadow: none !important;
+ }
+
+ .search-bar-btn {
+     color: #ffffff;
+     border: none;
+     border-radius: 999px !important;
+     min-width: 60px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+
+ .search-bar-btn:hover,
+ .search-bar-btn:focus,
+ .search-bar-btn:active {
+     color: #ffffff;
+     box-shadow: none;
+ }
+
+ /* Upcoming Events Styles */
+ .section-title {
+     border-left: 5px solid #e67e22;
+     font-family: 'Poppins', sans-serif;
+     padding-left: 15px;
+     letter-spacing: 1px;
+ }
+
+ .btn-outline-orange {
+     border: 2px solid #e67e22;
+     color: #e67e22;
+     font-weight: bold;
+     font-size: 0.8rem;
+ }
+
+ .btn-orange {
+     background-color: #e67e22;
+     color: white;
+     font-weight: bold;
+ }
+
+ .btn-orange:hover {
+     background-color: #d35400;
+     color: white;
+ }
+
+ /* Event GET TICKET button matching search style */
+ .event-get-btn {
+     background-color: #e67e22 !important;
+     color: #ffffff;
+     border: none;
+     border-radius: 999px;
+     min-width: 60px;
+     height: 40px;
+     padding: 0 18px;
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     font-weight: 700;
+     gap: 8px;
+ }
+
+ .event-get-btn i {
+     font-size: 1rem;
+ }
+
+ .event-get-btn:hover,
+ .event-get-btn:focus,
+ .event-get-btn:active {
+     background-color: #d35400;
+     color: #fff;
+     box-shadow: none;
+     transform: translateY(-1px);
+ }
+
+ /* Event Card Design */
+ .event-card {
+     border-radius: 10px;
+     overflow: hidden;
+     background: #fff;
+     transition: transform 0.3s ease;
+ }
+
+ .upcoming-event-card {
+     height: 100%;
+ }
+
+ .event-card:hover {
+     transform: translateY(-8px);
+ }
+
+ .event-image-container {
+     position: relative;
+     height: 190px;
+ }
+
+ .event-img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+ }
+
+ /* Date Badge on Image */
+ .date-badge {
+     position: absolute;
+     top: 0;
+     left: 15px;
+     background: rgba(0, 0, 0, 0.75);
+     color: white;
+     padding: 10px;
+     text-align: center;
+     display: flex;
+     flex-direction: column;
+     min-width: 60px;
+ }
+
+ .date-badge .day {
+     font-size: 1.6rem;
+     font-weight: bold;
+     line-height: 1;
+ }
+
+ .date-badge .month,
+ .date-badge .year {
+     font-size: 0.7rem;
+     text-transform: uppercase;
+ }
+
+ .event-details {
+     padding: 0.85rem !important;
+ }
+
+ .event-details h5 {
+     font-size: 1rem;
+ }
+
+ .event-details .btn-orange {
+     padding-top: 0.55rem;
+     padding-bottom: 0.55rem;
+ }
+
+ /* Price Tag */
+ .price-tag {
+     position: absolute;
+     top: 15px;
+     right: 0;
+     background: #e67e22;
+     color: white;
+     padding: 5px 15px;
+     font-weight: bold;
+     font-size: 0.85rem;
+ }
+
+ .more-events-wrap {
+     max-height: 0;
+     overflow: hidden;
+     opacity: 0;
+     transform: translateY(-12px);
+     transition: max-height 0.5s ease, opacity 0.35s ease, transform 0.35s ease;
+ }
+
+ .more-events-wrap.open {
+     max-height: 2500px;
+     opacity: 1;
+     transform: translateY(0);
+ }
+
+ .see-more-btn {
+     min-width: 150px;
+ }

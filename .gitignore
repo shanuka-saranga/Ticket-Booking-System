@@ -1,0 +1,16 @@
+# Node modules (ෆෝල්ඩර් දෙකේම තියෙන ඒවා ignore කරයි)
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Environment variables (සිකියුරිටි එකට වැදගත්)
+.env
+backend/.env
+
+# Build ෆෝල්ඩර් (React build කරද්දී හැදෙන ඒවා)
+build/
+frontend/build/
+
+# OS files
+.DS_Store
+Thumbs.db

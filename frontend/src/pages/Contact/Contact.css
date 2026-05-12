@@ -1,0 +1,129 @@
+.contact-page {
+    overflow-x: hidden;
+    background-color: #f8f9fa;
+}
+
+.contact-header {
+    padding: 110px 20px 10px;
+}
+
+.contact-page-title {
+    color: #111;
+    font-size: 2.6rem;
+    font-weight: 800;
+    margin-bottom: 14px;
+}
+
+.contact-page-subtitle {
+    color: #6c757d;
+    font-size: 1.05rem;
+    max-width: 760px;
+}
+
+.contact-container {
+    padding: 30px 20px 70px;
+}
+
+.contact-info-card,
+.contact-form-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    border: 1px solid rgba(229, 231, 235, 0.8);
+}
+
+.contact-info-card h3,
+.contact-form-card h3 {
+    color: #111827;
+    font-weight: 800;
+    margin-bottom: 18px;
+}
+
+.contact-info-card p {
+    color: #6b7280;
+}
+
+.contact-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-top: 22px;
+}
+
+.contact-item i {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(230, 126, 34, 0.12);
+    color: #e67e22;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.contact-item h5 {
+    margin-bottom: 6px;
+    font-size: 1rem;
+    color: #111827;
+    font-weight: 700;
+}
+
+.contact-item p {
+    margin-bottom: 0;
+    color: #6b7280;
+}
+
+.contact-form .form-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.contact-form .form-control {
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    padding: 0.85rem 1rem;
+    box-shadow: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-form .form-control:focus {
+    border-color: #e67e22;
+    box-shadow: 0 0 0 0.2rem rgba(230, 126, 34, 0.14);
+}
+
+@media (max-width: 768px) {
+    .contact-header {
+        padding-top: 95px;
+    }
+
+    .contact-page-title {
+        font-size: 2rem;
+    }
+
+    .contact-container {
+        padding: 20px 15px 50px;
+    }
+
+    .contact-info-card,
+    .contact-form-card {
+        padding: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-header {
+        padding: 88px 15px 8px;
+    }
+
+    .contact-page-title {
+        font-size: 1.7rem;
+    }
+
+    .contact-page-subtitle {
+        font-size: 0.95rem;
+    }
+}
